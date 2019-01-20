@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Context | naive</title>
+	<title>ChangeHandlers | naive</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_context_model_.html">&quot;context.model&quot;</a>
+					<a href="../modules/_change_handlers_model_.html">&quot;change-handlers.model&quot;</a>
 				</li>
 				<li>
-					<a href="_context_model_.context.html">Context</a>
+					<a href="_change_handlers_model_.changehandlers.html">ChangeHandlers</a>
 				</li>
 			</ul>
-			<h1>Interface Context</h1>
+			<h1>Interface ChangeHandlers</h1>
 		</div>
 	</div>
 </header>
@@ -73,65 +73,20 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Context</span>
+						<span class="target">ChangeHandlers</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_context_model_.context.html#cachepath" class="tsd-kind-icon">cache<wbr>Path</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_context_model_.context.html#logger" class="tsd-kind-icon">logger</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_context_model_.context.html#maxdbsizemb" class="tsd-kind-icon">max<wbr>DbSizeMB</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="cachepath" class="tsd-anchor"></a>
-					<h3>cache<wbr>Path</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/638ff46/src/context.model.ts#L13">context.model.ts:13</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Location of the database cache file (JSON file)</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="logger" class="tsd-anchor"></a>
-					<h3>logger</h3>
-					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/638ff46/src/context.model.ts#L9">context.model.ts:9</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Method used to log.</p>
-						</div>
-						<p>console.log is usually supplied
-							but it may be handy to pipe it elsewhere
-						later</p>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
+			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-external-module">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>handlerKey: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">object</span></div>
+				<ul class="tsd-parameters">
+					<li class="tsd-parameter">
+						<h5>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></h5>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -141,28 +96,16 @@
 												<h5>e: <span class="tsd-signature-type">any</span></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 									</li>
 								</ul>
 							</li>
 						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxdbsizemb" class="tsd-anchor"></a>
-					<h3>max<wbr>DbSizeMB</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>DbSizeMB<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/638ff46/src/context.model.ts#L17">context.model.ts:17</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Maximum database size in megabytes</p>
-						</div>
-					</div>
-				</section>
+					</li>
+					<li class="tsd-parameter">
+						<h5>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+					</li>
+				</ul>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -171,10 +114,10 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_change_handlers_model_.html">"change-<wbr>handlers.model"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_context_model_.html">"context.model"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -199,18 +142,7 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_context_model_.context.html" class="tsd-kind-icon">Context</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_context_model_.context.html#cachepath" class="tsd-kind-icon">cache<wbr>Path</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_context_model_.context.html#logger" class="tsd-kind-icon">logger</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_context_model_.context.html#maxdbsizemb" class="tsd-kind-icon">max<wbr>DbSizeMB</a>
-							</li>
-						</ul>
+						<a href="_change_handlers_model_.changehandlers.html" class="tsd-kind-icon">Change<wbr>Handlers</a>
 					</li>
 				</ul>
 				<ul class="after-current">
