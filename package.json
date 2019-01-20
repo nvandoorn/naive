@@ -1,9 +1,9 @@
 {
   "name": "naive",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A naive NoSQL database",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/database.js",
+  "types": "dist/database.d.ts",
   "scripts": {
     "build": "tsc && typedoc --out docs src",
     "test": "jest src"
