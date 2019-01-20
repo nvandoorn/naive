@@ -1,20 +1,9 @@
 import { Database } from "./database";
 
 describe("Database module", () => {
-  const mockCtx = {
-    config: {
-      email: "hello@co.co",
-      inactivityPeriodSeconds: 60
-    },
-    env: {
-      GITHUB_API_KEY: "",
-      MAIL_API_KEY: ""
-    },
-    logger: console.log
-  };
   let db: Database;
   beforeAll(async () => {
-    db = new Database(mockCtx);
+    db = new Database();
     await db.init();
   });
   // Next 2 tests simply look
