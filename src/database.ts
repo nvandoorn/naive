@@ -46,6 +46,8 @@ export class Database implements DatabaseInterface {
   // but only because we hold the entire DB in memory
   // (which obviously becomes a bad idea at some point)
   async read(path: string): Promise<Object> {
+    // root node case
+    if (path === "/") return this.buff;
     const pathParts = splitPath(path);
     return this.resolve(pathParts);
   }
