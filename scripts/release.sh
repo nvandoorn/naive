@@ -4,7 +4,7 @@ echo $branchName
 git stash push -- src || exit 1
 git checkout master
 yarn run build || exit 1
-touch build/.nojekyll
+touch docs/.nojekyll
 git add docs
 git commit -m "Update docs for release $1"
 git tag $1
