@@ -14,19 +14,19 @@ describe("Database module", () => {
       formula: "hello world"
     });
   });
-  test("it should fetch data", () => {
-    return db.fetch("/hello/world");
+  test("it should read data", () => {
+    return db.read("/hello/world");
   });
   test("it should have a string representation", () => {
     expect(db.toString()).not.toHaveLength(0);
   });
-  test("it should write and then fetch data", async () => {
+  test("it should write and then read data", async () => {
     const path = "/hello/world";
     const toWrite = {
       secret: "stuff"
     };
     await db.write(path, toWrite);
-    const s = await db.fetch(path);
+    const s = await db.read(path);
     expect(s).toBe(toWrite);
   });
   test("it should be empty after a flush", async () => {
@@ -36,18 +36,18 @@ describe("Database module", () => {
     await db.flush();
     expect(db.toString()).toHaveLength(2); // empty object
   });
-  test("it should fetch null on an empty node", async () => {
+  test("it should read null on an empty node", async () => {
     await db.flush();
-    const s = await db.fetch("/any/path/should/work");
+    const s = await db.read("/any/path/should/work");
     expect(s).toBeNull();
   });
-  test("it should not change on fetch", async () => {
+  test("it should not change on read", async () => {
     await db.flush();
     await db.write("/my/data/lives/here", {
       whiteHouseDinner: `America's Finest McDouble's`
     });
     const before = db.toString();
-    const s = await db.fetch("/no/data/here/silly");
+    const s = await db.read("/no/data/here/silly");
     expect(s).toBeNull();
     expect(before).toEqual(db.toString());
   });

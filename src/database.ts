@@ -38,14 +38,14 @@ export class Database implements DatabaseInterface {
   // this currently runs synchronously,
   // but only because we hold the entire DB in memory
   // (which obviously becomes a bad idea at some point)
-  async fetch(path: string): Promise<Object> {
+  async read(path: string): Promise<Object> {
     const pathParts = splitPath(path);
     return this.resolve(pathParts);
   }
 
   async write(path: string, toWrite: Object): Promise<void> {
     const pathParts = splitPath(path);
-    const writeTo = this.resolve(pathParts, false, -1);
+    const writeTo = this.resolve(pathParts, false, 1);
     writeTo[last(pathParts)] = toWrite;
     await this.serialize();
   }
@@ -62,12 +62,12 @@ export class Database implements DatabaseInterface {
   private resolve(
     pathParts: string[],
     isRead: boolean = true,
-    offset: number = 0
+    level: number = 0
   ): any {
     // start at the root of our buffer
     let lastNode = this.buff;
     let node;
-    for (let i = 0; i < pathParts.length + offset; i++) {
+    for (let i = 0; i < pathParts.length - level; i++) {
       const part: string = pathParts[i];
       // handle null node
       if (!lastNode[part]) {
