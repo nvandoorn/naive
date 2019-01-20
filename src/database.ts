@@ -4,8 +4,9 @@ import { promisify } from "util";
 import { DatabaseInterface } from "./database.model";
 import { Context } from "./context.model";
 import { NaiveError, NaiveErrorCode as e } from "./error.model";
+import { ChangeHandlers } from "./change-handlers.model";
 
-import { last } from "./util";
+import { last, getKey } from "./util";
 
 /**
  * Split path using "/" as a delimiter
@@ -16,6 +17,19 @@ const splitPath = (path: string): string[] => path.split("/").filter(k => k);
  * Identify if a path is a root node
  */
 const isRootNode = (path: string): boolean => path === "/" || path === "";
+
+/**
+ * Check if path1 matches path2,
+ * if not, check if its a subpath
+ *
+ * https://stackoverflow.com/questions/37521893/determine-if-a-path-is-subdirectory-of-another-in-node-js
+ */
+const isChildOrMatch = (child: string, parent: string) => {
+  // console.log(`child: ${child}, parent ${parent}`);
+  if (child === parent || parent === "/") return true;
+  const parentTokens = parent.split("/").filter((i: string) => i.length);
+  return parentTokens.every((t, i) => child.split("/")[i] === t);
+};
 
 const write = promisify(writeFile);
 const read = promisify(readFile);
@@ -37,7 +51,16 @@ export const DEFAULT_CTX = {
  * in memory
  */
 export class Database implements DatabaseInterface {
+  /**
+   * In memory buffer to read/write data
+   */
   private buff: any = {};
+  /**
+   * An array of callback functions that are alerted
+   * when the database changes (mostly want to use this
+   * for some type of pubsub functionality on-top)
+   */
+  private changeHandlers: ChangeHandlers = {};
   constructor(private ctx: Context = DEFAULT_CTX) {}
 
   async init(): Promise<void> {
@@ -69,6 +92,30 @@ export class Database implements DatabaseInterface {
       writeTo[last(pathParts)] = toWrite;
     }
     await this.serialize();
+    // alert everyone of our new change
+    await this.runChangeHandlers(path, toWrite);
+  }
+
+  private async runChangeHandlers(path: string, change: any): Promise<void> {
+    const handlers = Object.values(this.changeHandlers);
+    for (let handler of handlers) {
+      if (isChildOrMatch(path, handler.path)) {
+        await handler.callback(change);
+      }
+    }
+  }
+
+  subscribe(path: string, callback: (e: any) => Promise<any>): () => any {
+    const key = getKey("subscriber");
+    this.changeHandlers[key] = {
+      path,
+      callback
+    };
+    return () => this.unsubscribe(key);
+  }
+
+  private unsubscribe(key: string) {
+    delete this.changeHandlers[key];
   }
 
   remove(path: string): Promise<void> {
@@ -101,10 +148,21 @@ export class Database implements DatabaseInterface {
     isRead: boolean = true,
     level: number = 0
   ): any {
+    const [firstPart] = pathParts;
+    if (isRootNode(firstPart)) return this.buff;
+    const n = pathParts.length - level;
+    // TODO avoid having to pull
+    // this specific case out
+    if (n === 0) {
+      if (!this.buff[firstPart]) {
+        this.buff[firstPart] = {};
+        return this.buff[firstPart];
+      }
+    }
     // start at the root of our buffer
     let lastNode = this.buff;
     let node;
-    for (let i = 0; i < pathParts.length - level; i++) {
+    for (let i = 0; i < n; i++) {
       const part: string = pathParts[i];
       // handle null node
       if (!lastNode[part]) {
