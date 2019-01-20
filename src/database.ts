@@ -3,6 +3,7 @@ import { promisify } from "util";
 
 import { DatabaseInterface } from "./database.model";
 import { Context } from "./context.model";
+import { NaiveError, NaiveErrorCode as e } from "./error.model";
 
 import { last } from "./util";
 
@@ -13,7 +14,8 @@ const read = promisify(readFile);
 
 export const DEFAULT_CTX = {
   logger: console.log,
-  cachePath: `${__dirname}/db.json`
+  cachePath: `${__dirname}/db.json`,
+  maxDbSizeMB: 6
 };
 
 /**
@@ -108,8 +110,21 @@ export class Database implements DatabaseInterface {
   }
 
   /**
+   * Serialize the current buffer
+   * into a plain file.
+   *
+   * Change the path by injecting custom
+   * Context
+   *
+   * Throws OUT_OF_SPACE
    */
   private serialize(): Promise<void> {
+    if (!this.hasSpace()) throw new NaiveError(e.OUT_OF_SPACE);
     return write(this.ctx.cachePath, this.toString());
+  }
+
+  private hasSpace(): boolean {
+    // convert from MB to B
+    return this.toString().length <= this.ctx.maxDbSizeMB * 1024 ** 2;
   }
 }
