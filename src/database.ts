@@ -7,7 +7,14 @@ import { NaiveError, NaiveErrorCode as e } from "./error.model";
 
 import { last } from "./util";
 
+/**
+ * Split path using "/" as a delimiter
+ */
 const splitPath = (path: string): string[] => path.split("/").filter(k => k);
+
+/**
+ * Identify if a path is a root node
+ */
 const isRootNode = (path: string): boolean => path === "/" || path === "";
 
 const write = promisify(writeFile);
