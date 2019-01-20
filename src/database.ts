@@ -16,6 +16,8 @@ export const DB_CACHE_PATH = `${__dirname}/db.json`;
 /**
  * Implementation of NoSQL DB that uses paths and objects.
  *
+ * See DatabaseInterface for docs on public API
+ *
  * Uses a plain object as a buffer and reads/writes to a
  * plain JSON file. A better implementation could be backed
  * by somethig a little nicer and not hold the buffer
@@ -59,6 +61,18 @@ export class Database implements DatabaseInterface {
     return JSON.stringify(this.buff);
   }
 
+  /**
+   * Resolve the object located at path.
+   *
+   * If isRead == true, no new nodes will
+   * be created, and the function will return
+   * null if a null node is encountered on the path.
+   * Else, we create each node on the path.
+   *
+   * Level is used to determine how deep
+   * to recurse on path. Callers interested in
+   * writing may wish to stop higher up the tree.
+   */
   private resolve(
     pathParts: string[],
     isRead: boolean = true,
