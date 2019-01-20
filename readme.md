@@ -1,8 +1,8 @@
 # naive
 
----
-
 ![build status](https://api.travis-ci.org/nvandoorn/naive.svg?branch=master "Build Status")
+
+---
 
 A small NoSQL database with an API similar to Firebase backed by a static JSON file.
 
