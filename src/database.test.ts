@@ -49,6 +49,19 @@ describe("Database module", () => {
     expect(s).toBe(toWrite);
   });
 
+  test("it should write and read data from the root", async () => {
+    const toWrite = {
+      my: {
+        big: {
+          fun: "data"
+        }
+      }
+    };
+    await db.write("/", toWrite);
+    const s = await db.read("/");
+    expect(s).toEqual(toWrite);
+  });
+
   test("it should remove data", async () => {
     const path = "/this/is/fun";
     await db.write(path, {
