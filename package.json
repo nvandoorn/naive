@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && typedoc --out docs src",
-    "test": "jest"
+    "test": "jest src"
   },
   "author": "Nicholas Van Doorn",
   "license": "MIT",
