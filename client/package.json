@@ -1,5 +1,5 @@
 {
-  "name": "naive",
+  "name": "@nvandoorn/naive-core",
   "version": "1.3.2",
   "description": "A naive NoSQL database",
   "main": "dist/database.js",

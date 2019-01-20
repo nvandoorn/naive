@@ -1,0 +1,22 @@
+{
+  "name": "naive",
+  "version": "__REPLACE_VERSION__",
+  "description": "A naive NoSQL database",
+  "main": "dist/database.js",
+  "types": "dist/database.d.ts",
+  "scripts": {
+    "build": "tsc && typedoc --out docs src",
+    "test": "jest src"
+  },
+  "author": "Nicholas Van Doorn",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.2.4"
+  }
+}
