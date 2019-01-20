@@ -11,7 +11,10 @@ const splitPath = (path: string): string[] => path.split("/").filter(k => k);
 const write = promisify(writeFile);
 const read = promisify(readFile);
 
-export const DB_CACHE_PATH = `${__dirname}/db.json`;
+export const DEFAULT_CTX = {
+  logger: console.log,
+  cachePath: `${__dirname}/db.json`
+};
 
 /**
  * Implementation of NoSQL DB that uses paths and objects.
@@ -25,11 +28,11 @@ export const DB_CACHE_PATH = `${__dirname}/db.json`;
  */
 export class Database implements DatabaseInterface {
   private buff: any = {};
-  constructor(private ctx: Context = { logger: console.log }) {}
+  constructor(private ctx: Context = DEFAULT_CTX) {}
 
   async init(): Promise<void> {
     try {
-      const buff = await read(DB_CACHE_PATH);
+      const buff = await read(this.ctx.cachePath);
       this.buff = JSON.parse(buff.toString());
     } catch (e) {
       this.ctx.logger("Failed to init database, using empty object");
@@ -104,7 +107,9 @@ export class Database implements DatabaseInterface {
     return node;
   }
 
+  /**
+   */
   private serialize(): Promise<void> {
-    return write(DB_CACHE_PATH, this.toString());
+    return write(this.ctx.cachePath, this.toString());
   }
 }
