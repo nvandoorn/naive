@@ -19,6 +19,11 @@ export interface DatabaseInterface {
   read(path: string): Promise<Object>;
 
   /**
+   * Subscribe to all data changes at path
+   */
+  subscribe(path: string, callback: (e: any) => any): () => any;
+
+  /**
    * Write data to the node described by path
    * where path once again uses "/" separate nodes
    *
