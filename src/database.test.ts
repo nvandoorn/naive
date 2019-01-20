@@ -74,6 +74,26 @@ describe("Database module", () => {
     expect(s).toBeNull();
   });
 
+  test("it should remove data at path & leave other data", async () => {
+    const path = "/this/is/fun";
+
+    const buzzFeed = {
+      stories: ["hack your dogs brain in 4 easy steps"]
+    };
+    await db.write(path, {
+      foxNews: {
+        stories: ["AOC", "aoc", "aOC", "aOc"]
+      },
+      buzzFeed
+    });
+    const appendedPath = `${path}/foxNews`;
+    await db.remove(appendedPath);
+    const buzzFeedOut = await db.read(`${path}/buzzFeed`);
+    const foxOut = await db.read(appendedPath);
+    expect(buzzFeedOut).toEqual(buzzFeed);
+    expect(foxOut).toBeNull();
+  });
+
   test("it should be empty after a flush", async () => {
     await db.write("/hello/world", {
       my: "object"
