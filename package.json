@@ -1,15 +1,15 @@
 {
   "name": "naive",
   "version": "1.0.0",
-  "description": "",
+  "description": "A naive NoSQL database",
   "main": "index.js",
   "scripts": {
     "build": "tsc && typedoc --out docs src",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "author": "Nicholas Van Doorn",
+  "license": "MIT",
+  "devDependencies": {
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.18",
     "jest": "^23.6.0",
