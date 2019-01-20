@@ -50,11 +50,15 @@ export class Database implements DatabaseInterface {
     return this.resolve(pathParts);
   }
 
-  async write(path: string, toWrite: Object): Promise<void> {
+  async write(path: string, toWrite: any): Promise<void> {
     const pathParts = splitPath(path);
     const writeTo = this.resolve(pathParts, false, 1);
     writeTo[last(pathParts)] = toWrite;
     await this.serialize();
+  }
+
+  remove(path: string): Promise<void> {
+    return this.write(path, null);
   }
 
   async flush(): Promise<void> {

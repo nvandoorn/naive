@@ -30,6 +30,11 @@ export interface DatabaseInterface {
   write(path: string, toWrite: Object): Promise<void>;
 
   /**
+   * Remove data at path
+   */
+  remove(path: string): Promise<void>;
+
+  /**
    * Empty the database
    */
   flush(): Promise<void>;

@@ -49,6 +49,18 @@ describe("Database module", () => {
     expect(s).toBe(toWrite);
   });
 
+  test("it should remove data", async () => {
+    const path = "/this/is/fun";
+    await db.write(path, {
+      foxNews: {
+        stories: ["AOC", "aoc", "aOC", "aOc"]
+      }
+    });
+    await db.remove(path);
+    const s = await db.read(path);
+    expect(s).toBeNull();
+  });
+
   test("it should be empty after a flush", async () => {
     await db.write("/hello/world", {
       my: "object"
