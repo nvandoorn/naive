@@ -8,6 +8,7 @@ import { NaiveError, NaiveErrorCode as e } from "./error.model";
 import { last } from "./util";
 
 const splitPath = (path: string): string[] => path.split("/").filter(k => k);
+const isRootNode = (path: string): boolean => path === "/" || path === "";
 
 const write = promisify(writeFile);
 const read = promisify(readFile);
@@ -47,13 +48,13 @@ export class Database implements DatabaseInterface {
   // (which obviously becomes a bad idea at some point)
   async read(path: string): Promise<Object> {
     // root node case
-    if (path === "/") return this.buff;
+    if (isRootNode(path)) return this.buff;
     const pathParts = splitPath(path);
     return this.resolve(pathParts);
   }
 
   async write(path: string, toWrite: any): Promise<void> {
-    if (path === "/") {
+    if (isRootNode(path)) {
       this.buff = toWrite;
     } else {
       const pathParts = splitPath(path);
