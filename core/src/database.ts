@@ -3,10 +3,10 @@ import { promisify } from "util";
 
 import { DatabaseInterface } from "./database.model";
 import { Context } from "./context.model";
-import { NaiveError, NaiveErrorCode as e } from "./error.model";
+import { NaiveError, NaiveErrorCode as e } from "../../lib/error.model";
 import { ChangeHandlers } from "./change-handlers.model";
 
-import { last, getKey } from "./util";
+import { last, getKey } from "../../lib/util";
 
 /**
  * Split path using "/" as a delimiter

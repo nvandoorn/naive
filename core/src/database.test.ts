@@ -1,5 +1,5 @@
 import { Database } from "./database";
-import { NaiveErrorCode } from "./error.model";
+import { NaiveErrorCode } from "../../lib/error.model";
 
 const generateString = (sizeBytes: number) =>
   Array(Math.ceil(sizeBytes)).fill("a");
