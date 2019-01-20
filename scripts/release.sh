@@ -7,7 +7,7 @@ touch build/.nojekyll
 git add docs
 git commit -m "Update docs for release $1"
 git tag $1
-git push origin master
+git push --tags origin master
 git checkout $branchName
 git stash pop
 
