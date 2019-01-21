@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-cd core
-yarn test || exit 1
-cd ../server
-yarn test || exit 1
-cd ../client
-yarn test || exit 1
+
+declare -a arr=("core" "client" "server")
+
+for i in "${arr[@]}"
+do
+  cd $i
+  yarn test
+  cd ..
+done
