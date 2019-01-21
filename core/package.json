@@ -1,6 +1,6 @@
 {
   "name": "naive-core",
-  "version": "1.5.4",
+  "version": "2.0.0",
   "description": "A naive NoSQL database",
   "main": "dist/core/src/index.js",
   "types": "dist/core/src/index.d.ts",
