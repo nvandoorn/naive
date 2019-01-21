@@ -1,12 +1,14 @@
 {
-  "name": "@nvandoorn/naive-core",
-  "version": "1.3.2",
-  "description": "A naive NoSQL database",
-  "main": "dist/database.js",
-  "types": "dist/database.d.ts",
+  "name": "naive-server",
+  "version": "1.0.0",
+  "description": "A naive NoSQL database server",
   "scripts": {
     "build": "tsc && typedoc --out docs src",
-    "test": "jest src"
+    "test": "jest src",
+    "start": "ts-node bin/index.ts"
+  },
+  "bin": {
+    "naive-server": "node dist/server/bin/index.js"
   },
   "author": "Nicholas Van Doorn",
   "license": "MIT",
@@ -18,5 +20,11 @@
     "ts-node": "^7.0.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "@types/ws": "^6.0.1",
+    "express": "^4.16.4",
+    "ws": "^6.1.2"
   }
 }
