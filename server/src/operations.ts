@@ -6,6 +6,7 @@ import { DatabaseChange } from "../../lib/database-change.model";
 import { DatabaseInterface } from "naive-core";
 
 import express, { RequestHandler } from "express";
+import bodyParser from "body-parser";
 
 export const bindOperations = (
   ctx: Context,
@@ -44,6 +45,7 @@ export const bindOperations = (
   };
 
   const router = express();
+  router.use(bodyParser.json());
   router.post("/write", writeHandler);
   router
     .route("/subscribe")
