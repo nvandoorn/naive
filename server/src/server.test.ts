@@ -8,7 +8,7 @@ import process from "process";
 // so fuck it for now
 import { dbFactory, DatabaseConnection } from "../../client/src";
 
-const port = +(process.env.PORT || 5000);
+const port = +(process.env.PORT || 5005);
 const httpPort = port;
 const wsPort = port + 1;
 
@@ -20,7 +20,7 @@ describe("Server module", async () => {
       wsPort,
       logger: console.log
     });
-    db = dbFactory({ httpPort, wsPort, url: "localhost" });
+    db = dbFactory({ wsPort, httpUrl: `http://localhost:${httpPort}` });
     await db.init();
   });
   test("it should work", async () => {
