@@ -1,8 +1,12 @@
 import { runServer } from "./server";
 import process from "process";
 
-// we test the server using the client
-import { dbFactory, DatabaseConnection } from "naive-client";
+// We test the server using the client.
+// It would be better to import this
+// from a linked npm package,
+// but that requires rebuilding each time
+// so fuck it for now
+import { dbFactory, DatabaseConnection } from "../../client/src";
 
 const port = +(process.env.PORT || 5000);
 const httpPort = port;
