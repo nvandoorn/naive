@@ -18,6 +18,7 @@ export const bindOperations = (
   const writeHandler: RequestHandler = async (req, res) => {
     const { path, toWrite } = req.body as WriteRequest;
     await db.write(path, toWrite);
+    res.status(200).end();
   };
 
   const addSubHandler: RequestHandler = async (req, res) => {
