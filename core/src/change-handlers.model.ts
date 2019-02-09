@@ -1,6 +1,6 @@
 export interface ChangeHandlers {
   [handlerKey: string]: {
-    path: string;
-    callback: (e: any) => Promise<any>;
-  };
+    path: string
+    callback: (e: any) => Promise<any>
+  }
 }

@@ -1,6 +1,6 @@
 # naive
 
-![build status](https://api.travis-ci.org/nvandoorn/naive.svg?branch=master "Build Status")
+![build status](https://api.travis-ci.org/nvandoorn/naive.svg?branch=master 'Build Status')
 
 [Read the docs](https://nvandoorn.github.io/naive/)
 

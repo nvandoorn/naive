@@ -1,5 +1,7 @@
-import { Config } from "./config.model";
-import { DatabaseConnection } from "./database-connection.model";
+import { Config } from './config.model'
+import { DatabaseConnection } from './database-connection.model'
+
+const IS_NODE = true
 
 /**
  * Client side implementation is implemented using
@@ -7,25 +9,34 @@ import { DatabaseConnection } from "./database-connection.model";
  * size
  */
 export const dbFactory = (config: Config): DatabaseConnection => {
+  // TODO figure out how to patch
+  // in native fetch instead
+  // when this is running in the browser
+  const send = require('node-fetch')
   const write = (path: string, toWrite: Object | null) => {
-    const { url, httpPort } = config;
-    return fetch(`${url}:${httpPort}/write`, {
-      method: "POST",
-      body: JSON.stringify({
-        path,
-        toWrite
-      })
-    });
-  };
+    const { httpUrl } = config
+    const body = JSON.stringify({
+      path,
+      toWrite
+    })
+    return send(`${httpUrl}/write`, {
+      method: 'POST',
+      body,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+  }
   return {
     async init() {},
     async close() {},
     async subscribe(path: string, callback: (e: any) => Promise<any>) {
-      return () => {};
+      return () => {}
     },
     write,
     async remove(path: string) {
-      write(path, null);
+      write(path, null)
     }
-  };
-};
+  }
+}

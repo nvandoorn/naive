@@ -1,3 +1,3 @@
 export interface SubscriptionRequest {
-  path: string;
+  path: string
 }

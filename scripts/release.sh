@@ -1,20 +1,45 @@
-sed -i.bak s/__REPLACE_VERSION__/$1/g package.json
-yarn test || exit 1
-branchName=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
-echo $branchName
-# TODO find a better way to exlcude
-# docs from the stash
-git stash push -- src || exit 1
-git checkout master
-yarn run build || exit 1
-# this is a hack required
-# to serve paths that start
-# with '_'
+#!/usr/bin/env bash
+
+declare -a arr=("core" "client" "server")
+
+# TODO re-enable git stuff
+
+# git stash || exit 1
+# git checkout master
+
+rm -rf docs
+mkdir docs
 touch docs/.nojekyll
-git add docs package.json
-git commit -m "Update docs for release $1"
-git tag $1
-git push --tags origin master
-git checkout $branchName
-git stash pop
-# sed -i.bak s/$1/__REPLACE_VERSION__/g package.json
+
+branchName=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+for i in "${arr[@]}"
+do
+  echo "***  Building naive-$i  ***"
+  cd $i
+  # update the version in the package file
+  yarn run build || exit 1
+  mv docs ../docs/$i
+  cd ..
+done
+
+for i in "${arr[@]}"
+do
+  echo "***  Testing and publishing naive-$i  ***"
+  cd $i
+  # make sure the tests pass
+  yarn test || exit 1
+  # update the version in the package file
+  # for some reason yarn fucks
+  # with the git repo? use npm for now
+  # I guess
+  npm version $1
+  npm publish --access public || exit 1
+  cd ..
+done
+
+# git commit -m "Update for release $1"
+# git tag $1
+# git push --tags origin master
+# git checkout $branchName
+# git stash pop

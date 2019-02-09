@@ -1,5 +1,5 @@
 export interface Context {
-  httpPort: number;
-  wsPort: number;
-  logger: (e: any) => any;
+  httpPort: number
+  wsPort: number
+  logger: (e: any) => any
 }

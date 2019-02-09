@@ -1,4 +1,4 @@
 export interface DatabaseChange {
-  path: string;
-  change: Object;
+  path: string
+  change: Object
 }

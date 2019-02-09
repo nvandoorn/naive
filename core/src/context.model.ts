@@ -6,13 +6,13 @@ export interface Context {
    * but it may be handy to pipe it elsewhere
    * later
    */
-  logger: (e: any) => void;
+  logger: (e: any) => void
   /**
    * Location of the database cache file (JSON file)
    */
-  cachePath: string;
+  cachePath: string
   /**
    * Maximum database size in megabytes
    */
-  maxDbSizeMB: number;
+  maxDbSizeMB: number
 }
