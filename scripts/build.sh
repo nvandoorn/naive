@@ -3,6 +3,7 @@
 declare -a arr=("core" "client" "server")
 rm -rf docs || exit 0
 mkdir docs || exit 0
+touch docs/.nojekyll
 
 for i in "${arr[@]}"
 do
