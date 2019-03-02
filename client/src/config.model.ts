@@ -1,4 +1,4 @@
 export interface Config {
-  wsPort: number
+  wsUrl: string
   httpUrl: string
 }

@@ -5,14 +5,28 @@ import WebSocket from 'ws'
 
 import { Database, Context as CoreContext } from 'naive-core'
 
-export const runServer = async (ctx: Context) => {
+type CleanupRoutine = () => Promise<void>
+
+export const runServer = async (ctx: Context): Promise<CleanupRoutine> => {
   const db = new Database()
   await db.init()
   const wss = new WebSocket.Server({ port: ctx.wsPort })
 
-  bindOperations(ctx, db, async (dbChange: DatabaseChange) => {
-    for (let client of wss.clients) {
-      client.send(dbChange)
+  const socketCleanup = () =>
+    new Promise((resolve, reject) => {
+      wss.close(resolve)
+    })
+
+  const operationCleanup = await bindOperations(
+    ctx,
+    db,
+    async (dbChange: DatabaseChange) => {
+      for (let client of wss.clients) {
+        client.send(JSON.stringify(dbChange))
+      }
     }
-  })
+  )
+  return async () => {
+    Promise.all([operationCleanup(), socketCleanup()])
+  }
 }

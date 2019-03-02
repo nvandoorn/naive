@@ -11,21 +11,43 @@ import { dbFactory, DatabaseConnection } from '../../client/src'
 const port = +(process.env.PORT || 5005)
 const httpPort = port
 const wsPort = port + 1
+const localHost = 'http://localhost:'
 
 describe('Server module', async () => {
   let db: DatabaseConnection
+  let cleanup: () => Promise<void>
   beforeAll(async () => {
-    await runServer({
+    cleanup = await runServer({
       httpPort,
       wsPort,
       logger: console.log
     })
-    db = dbFactory({ wsPort, httpUrl: `http://localhost:${httpPort}` })
+    db = dbFactory({
+      wsUrl: `${localHost}${wsPort}`,
+      httpUrl: `${localHost}${httpPort}`
+    })
     await db.init()
   })
-  test('it should work', async () => {
-    await db.write('/hello/world', {
+  afterAll(async () => {
+    if (cleanup) {
+      await cleanup()
+    }
+  })
+  test('it should leave input data unchaged', async () => {
+    const path = '/hello/world'
+    const fixture = {
       my: 'data'
+    }
+    await db.write(path, fixture)
+    const r = await db.read(path)
+    expect(r).toMatchObject(fixture)
+  })
+  test('it should get data in realtime', () => {
+    return new Promise(async (resolve, reject) => {
+      db.subscribe('/hello/world', (data: any) => {
+        resolve()
+      })
+      await db.write('/hello/world', { data: 5 })
     })
   })
 })

@@ -25,7 +25,6 @@ const isRootNode = (path: string): boolean => path === '/' || path === ''
  * https://stackoverflow.com/questions/37521893/determine-if-a-path-is-subdirectory-of-another-in-node-js
  */
 const isChildOrMatch = (child: string, parent: string) => {
-  // console.log(`child: ${child}, parent ${parent}`);
   if (child === parent || parent === '/') return true
   const parentTokens = parent.split('/').filter((i: string) => i.length)
   return parentTokens.every((t, i) => child.split('/')[i] === t)

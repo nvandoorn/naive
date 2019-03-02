@@ -3,6 +3,8 @@ import { SubscriptionRequest } from '../../lib/subscription-req.model'
 import { WriteRequest } from '../../lib/write-req.model'
 import { DatabaseChange } from '../../lib/database-change.model'
 
+import { decodePath } from '../../lib/path'
+
 import { DatabaseInterface } from 'naive-core'
 
 import express, { RequestHandler } from 'express'
@@ -13,12 +15,25 @@ export const bindOperations = (
   db: DatabaseInterface,
   send: (e: DatabaseChange) => Promise<any>
 ) => {
+  // these methods should be tracked using a better
+  // data structure
   const unsubs: { [key: string]: () => any } = {}
 
   const writeHandler: RequestHandler = async (req, res) => {
     const { path, toWrite } = req.body as WriteRequest
     await db.write(path, toWrite)
     res.status(200).end()
+  }
+
+  const readHandler: RequestHandler = async (req, res) => {
+    const { path: encodedPath } = req.params as WriteRequest
+    const path = decodePath(encodedPath)
+    try {
+      const payload = await db.read(path)
+      res.json(payload)
+    } catch (err) {
+      res.status(500).end()
+    }
   }
 
   const addSubHandler: RequestHandler = async (req, res) => {
@@ -47,10 +62,18 @@ export const bindOperations = (
 
   const router = express()
   router.use(bodyParser.json())
+  router.get('/read/:path', readHandler)
   router.post('/write', writeHandler)
   router
     .route('/subscribe')
     .post(addSubHandler)
     .delete(removeSubHandler)
-  router.listen(ctx.httpPort, () => ctx.logger('HTTPS server started'))
+  const instance = router.listen(ctx.httpPort, () =>
+    ctx.logger('HTTPS server started')
+  )
+
+  return () =>
+    new Promise((resolve, reject) => {
+      instance.close(resolve)
+    })
 }
