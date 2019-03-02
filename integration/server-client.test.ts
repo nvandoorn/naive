@@ -1,4 +1,4 @@
-import { runServer } from './server'
+import { runServer } from '../server/src/server'
 import process from 'process'
 
 // We test the server using the client.
@@ -6,7 +6,7 @@ import process from 'process'
 // from a linked npm package,
 // but that requires rebuilding each time
 // so fuck it for now
-import { dbFactory, DatabaseConnection } from '../../client/src'
+import { dbFactory, DatabaseConnection } from '../client/src'
 
 const port = +(process.env.PORT || 5005)
 const httpPort = port
@@ -43,9 +43,9 @@ describe('Server module', async () => {
     expect(r).toMatchObject(fixture)
   })
   test('it should get data in realtime', () => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       db.subscribe('/hello/world', (data: any) => {
-        resolve()
+        resolve(data)
       })
       await db.write('/hello/world', { data: 5 })
     })

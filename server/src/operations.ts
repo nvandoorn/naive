@@ -54,7 +54,7 @@ export const bindOperations = (
     res.status(200).end()
   }
 
-  const removeSubHandler: RequestHandler = async (req, res) => {
+  const removeSubHandler: RequestHandler = async req => {
     const { path } = req.body as SubscriptionRequest
     const unsub = unsubs[path]
     if (unsub) unsub()
@@ -73,7 +73,7 @@ export const bindOperations = (
   )
 
   return () =>
-    new Promise((resolve, reject) => {
+    new Promise(resolve => {
       instance.close(resolve)
     })
 }

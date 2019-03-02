@@ -3,7 +3,7 @@ import { bindOperations } from './operations'
 import { DatabaseChange } from '../../lib/database-change.model'
 import WebSocket from 'ws'
 
-import { Database, Context as CoreContext } from 'naive-core'
+import { Database } from 'naive-core'
 
 type CleanupRoutine = () => Promise<void>
 
@@ -13,7 +13,7 @@ export const runServer = async (ctx: Context): Promise<CleanupRoutine> => {
   const wss = new WebSocket.Server({ port: ctx.wsPort })
 
   const socketCleanup = () =>
-    new Promise((resolve, reject) => {
+    new Promise(resolve => {
       wss.close(resolve)
     })
 
