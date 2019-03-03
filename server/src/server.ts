@@ -21,8 +21,13 @@ export const runServer = async (ctx: Context): Promise<CleanupRoutine> => {
     ctx,
     db,
     async (dbChange: DatabaseChange) => {
+      const changeBuff = JSON.stringify(dbChange)
+      // TODO figure out if `client` cares about
+      // `dbChange` instead of just assuming that
+      // `client` cares because `subscribe` has been
+      // called at least once
       for (let client of wss.clients) {
-        client.send(JSON.stringify(dbChange))
+        client.send(changeBuff)
       }
     }
   )
