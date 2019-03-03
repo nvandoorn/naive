@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 
 // TODO use npm/yarn
-import { dbFactory, DatabaseConnection } from '../../../../client/src'
+import { dbFactory, DatabaseConnection } from 'naive-client'
 
 import { ChatMessage } from './chat-message.model'
 
-const wsUrl = 'http://localhost:5001'
+const wsUrl = 'ws://localhost:5001'
 const httpUrl = 'http://localhost:5000'
 
 @Injectable({
@@ -16,6 +16,10 @@ export class MessagingService {
   private db: DatabaseConnection
   constructor() {
     this.db = dbFactory({ wsUrl, httpUrl })
+  }
+
+  init() {
+    return this.db.init()
   }
 
   async makeChatRoom(userId: string): Promise<string> {
@@ -29,14 +33,18 @@ export class MessagingService {
 
   getChatRoom(chatRoomId: string): Observable<ChatMessage[]> {
     return Observable.create(observer => {
-      this.db.subscribe(`/chatRooms/${chatRoomId}`, data => observer.next(data))
+      this.db.subscribe(`/chatRooms/${chatRoomId}`, data => {
+        observer.next(Object.values(data))
+      })
     })
   }
 
   sendMessage(userId: string, chatRoomId: string, message: string) {
     return this.db.write(`/chatRooms/${chatRoomId}`, {
-      user: userId,
-      message
+      [Date.now().toString()]: {
+        user: userId,
+        message
+      }
     })
   }
 }
