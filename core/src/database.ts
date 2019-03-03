@@ -83,16 +83,21 @@ export class Database implements DatabaseInterface {
   }
 
   async write(path: string, toWrite: any): Promise<void> {
+    let toSet
     if (isRootNode(path)) {
       this.buff = toWrite
+      toSet = toWrite
     } else {
       const pathParts = splitPath(path)
+      const key = last(pathParts)
       const writeTo = this.resolve(pathParts, false, 1)
-      writeTo[last(pathParts)] = toWrite
+      const prev = writeTo[key]
+      toSet = { ...prev, ...toWrite }
+      writeTo[key] = toSet
     }
     await this.serialize()
     // alert everyone of our new change
-    await this.runChangeHandlers(path, toWrite)
+    await this.runChangeHandlers(path, toSet)
   }
 
   private async runChangeHandlers(path: string, change: any): Promise<void> {
