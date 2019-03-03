@@ -8,6 +8,7 @@ import { decodePath } from '../../lib/path'
 import { DatabaseInterface } from 'naive-core'
 
 import express, { RequestHandler } from 'express'
+import cors from 'cors'
 import bodyParser from 'body-parser'
 
 export const bindOperations = (
@@ -62,6 +63,7 @@ export const bindOperations = (
 
   const router = express()
   router.use(bodyParser.json())
+  router.use(cors({ origin: true }))
   router.get('/read/:path', readHandler)
   router.post('/write', writeHandler)
   router
