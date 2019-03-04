@@ -83,14 +83,6 @@
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_database_.html#write" class="tsd-kind-icon">write</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_database_.html#ischildormatch" class="tsd-kind-icon">is<wbr>Child<wbr>OrMatch</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_database_.html#isrootnode" class="tsd-kind-icon">is<wbr>Root<wbr>Node</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_core_src_database_.html#splitpath" class="tsd-kind-icon">split<wbr>Path</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
@@ -108,7 +100,7 @@
 					<div class="tsd-signature tsd-kind-icon">read<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__promisify__</span><span class="tsd-signature-symbol"> =&nbsp;promisify(readFile)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L34">core/src/database.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/c973da4/core/src/database.ts#L13">core/src/database.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -118,101 +110,9 @@
 					<div class="tsd-signature tsd-kind-icon">write<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__promisify__</span><span class="tsd-signature-symbol"> =&nbsp;promisify(writeFile)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L33">core/src/database.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/c973da4/core/src/database.ts#L12">core/src/database.ts:12</a></li>
 						</ul>
 					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="ischildormatch" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Child<wbr>OrMatch</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Child<wbr>OrMatch<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L27">core/src/database.ts:27</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if path1 matches path2,
-									if not, check if its a subpath</p>
-								</div>
-								<p><a href="https://stackoverflow.com/questions/37521893/determine-if-a-path-is-subdirectory-of-another-in-node-js">https://stackoverflow.com/questions/37521893/determine-if-a-path-is-subdirectory-of-another-in-node-js</a></p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>child: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>parent: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="isrootnode" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Root<wbr>Node</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Root<wbr>Node<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L19">core/src/database.ts:19</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Identify if a path is a root node</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>path: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="splitpath" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> split<wbr>Path</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">split<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L14">core/src/database.ts:14</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Split path using &quot;/&quot; as a delimiter</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>path: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -223,7 +123,7 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CTX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L36">core/src/database.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/c973da4/core/src/database.ts#L15">core/src/database.ts:15</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -232,7 +132,7 @@
 						<div class="tsd-signature tsd-kind-icon">cache<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;${__dirname}/db.json&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L38">core/src/database.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/c973da4/core/src/database.ts#L17">core/src/database.ts:17</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -242,7 +142,7 @@
 						<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">log</span><span class="tsd-signature-symbol"> =&nbsp;console.log</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L37">core/src/database.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/c973da4/core/src/database.ts#L16">core/src/database.ts:16</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -252,7 +152,7 @@
 						<div class="tsd-signature tsd-kind-icon">max<wbr>DbSizeMB<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;6</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/690a093/core/src/database.ts#L39">core/src/database.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/nvandoorn/naive/blob/c973da4/core/src/database.ts#L18">core/src/database.ts:18</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -293,6 +193,9 @@
 						<a href="_lib_error_model_.html">"lib/error.model"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="_lib_path_.html">"lib/path"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
 						<a href="_lib_util_.html">"lib/util"</a>
 					</li>
 				</ul>
@@ -307,15 +210,6 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_core_src_database_.html#write" class="tsd-kind-icon">write</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_core_src_database_.html#ischildormatch" class="tsd-kind-icon">is<wbr>Child<wbr>OrMatch</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_core_src_database_.html#isrootnode" class="tsd-kind-icon">is<wbr>Root<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_core_src_database_.html#splitpath" class="tsd-kind-icon">split<wbr>Path</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
 						<a href="_core_src_database_.html#default_ctx" class="tsd-kind-icon">DEFAULT_<wbr>CTX</a>
