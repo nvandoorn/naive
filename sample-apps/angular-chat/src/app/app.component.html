@@ -1,4 +1,10 @@
 <div>
+  Chat Room directory:
+  <ul>
+    <li *ngFor="let room of (directory$ | async)">
+      {{room}}
+    </li>
+  </ul>
   <form>
     <label>Username</label>
     <input type="text" name="user-id" [(ngModel)]="userId" />
