@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
 import { MessagingService } from './messaging.service'
+import { NaiveService } from './naive.service'
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, FormsModule],
-  providers: [MessagingService],
+  providers: [MessagingService, NaiveService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
