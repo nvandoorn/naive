@@ -8,3 +8,5 @@ export const last = <T>(t: T[]): T => t[t.length - 1]
  */
 export const getKey = (seed: string) =>
   seed + Date.now() + Math.floor(Math.random() * 1000)
+
+export const now = () => Date.now() / 1000

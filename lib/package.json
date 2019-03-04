@@ -1,0 +1,26 @@
+{
+  "name": "naive-lib",
+  "version": "1.0.0",
+  "description": "Small library for the naive NoSQL db",
+  "scripts": {
+    "build": "tsc && typedoc --out docs src",
+    "test": "jest",
+    "test:watch": "jest src --watch",
+    "start": "ts-node bin/index.ts"
+  },
+  "bin": {
+    "naive-server": "node dist/server/bin/index.js"
+  },
+  "author": "Nicholas Van Doorn",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "@types/jest": "^24.0.9"
+  }
+}

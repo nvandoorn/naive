@@ -2,7 +2,12 @@
 
 declare -a arr=("core" "client" "server")
 
-# start with unit tests for
+# start by testing
+# library code
+cd lib
+yarn test
+cd ..
+# then unit tests for
 # each package
 for i in "${arr[@]}"
 do
