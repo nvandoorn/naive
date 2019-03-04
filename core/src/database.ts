@@ -7,28 +7,7 @@ import { NaiveError, NaiveErrorCode as e } from '../../lib/error.model'
 import { ChangeHandlers } from './change-handlers.model'
 
 import { last, getKey } from '../../lib/util'
-
-/**
- * Split path using "/" as a delimiter
- */
-const splitPath = (path: string): string[] => path.split('/').filter(k => k)
-
-/**
- * Identify if a path is a root node
- */
-const isRootNode = (path: string): boolean => path === '/' || path === ''
-
-/**
- * Check if path1 matches path2,
- * if not, check if its a subpath
- *
- * https://stackoverflow.com/questions/37521893/determine-if-a-path-is-subdirectory-of-another-in-node-js
- */
-const isChildOrMatch = (child: string, parent: string) => {
-  if (child === parent || parent === '/') return true
-  const parentTokens = parent.split('/').filter((i: string) => i.length)
-  return parentTokens.every((t, i) => child.split('/')[i] === t)
-}
+import { isRootNode, splitPath, isChildOrMatch } from '../../lib/path'
 
 const write = promisify(writeFile)
 const read = promisify(readFile)
