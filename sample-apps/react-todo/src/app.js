@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+import './app.css'
+
+export default function App(db) {
+  const [todoText, setTodoText] = useState('')
+  const [todoList, setTodoList] = useState([])
+  const addTodo = text => {
+    setTodoList([...todoList, text])
   }
+  return (
+    <div>
+      <form>
+        <label>Todo</label>
+        <input
+          type="text"
+          name="todo"
+          onChange={e => setTodoText(e.target.value)}
+          value={todoText}
+        />
+      </form>
+      <button onClick={() => addTodo(todoText)}>Add Todo</button>
+      <ul>
+        {todoList.map(k => (
+          <li key={k}>{k}</li>
+        ))}
+      </ul>
+    </div>
+  )
 }
-
-export default App;
